@@ -1,11 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+    <title>Gem-Puzzle</title>
+  </head>
+
+  <body class="main-page">
+    <div class="centralizer">
+      <header class="header">
+        <nav class="navigation">
+          <ul class="navigation__list list">
+            <li class="navigation__item">
+              <button id="beginButton" class="navigation__button button">
+                Размешать и начать
+              </button>
+            </li>
+            <li class="navigation__item">
+              <button id="stopButton" class="navigation__button button">
+                Стоп
+              </button>
+            </li>
+            <li class="navigation__item">
+              <button id="saveButton" class="navigation__button button">
+                Сохранить
+              </button>
+            </li>
+            <li class="navigation__item">
+              <button id="resultsButton" class="navigation__button button">
+                Результаты
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </header>
+
+      <main class="main">
+        <div class="game">
+          <p class="game__description">
+            <p>Ходов: <span class="game__turns">0</span></p>
+            <p>
+              Время:
+              <span class="game__time">
+                <span id="hours" class="time__hours">00 </span>:
+                <span id="minutes" class="time__minutes">00 </span>:
+                <span id="seconds" class="time__seconds">00</span>
+              </span>
+            </p>
+          </p>
+
+          <div id="gameField" class="game__field">
+          </div>
+        </div>
+
+        <div class="size">
+          <p class="size__description">
+            Размер поля: <span id="sizeOutput" class="size__output">4x4</span>
+          </p>
+          <label for="sizeSelect">Выбрать размер поля:</label>
+          <select id="sizeSelect" class="size__select">
+            <option value="9">3x3</option>
+            <option value="16" selected>4x4</option>
+            <option value="25">5x5</option>
+            <option value="36">6x6</option>
+            <option value="49">7x7</option>
+            <option value="64">8x8</option>
+          </select>
+        </div>
+      </main>
+
+      <footer class="footer">
+        by @Musmen. 2020
+      </footer>
+    </div>
+    
+    <script src='./js/script.js' type="module"></script>
+  </body>
 </html>

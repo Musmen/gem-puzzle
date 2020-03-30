@@ -1,5 +1,5 @@
 export function initArray(fieldSize) {
-  const field = new Array(fieldSize + 1).fill('x');
+  const field = new Array(fieldSize).fill('x');
   return field.map((item, index) => !index ? item : `${index}`);
 }
 

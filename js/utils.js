@@ -1,7 +1,7 @@
-import { EMPTY_ELEMENT } from './helper.js';
+import { EMPTY_ELEMENT_VALUE } from './helper.js';
 
 export function initField(fieldSize) {
-  const field = new Array(fieldSize).fill(EMPTY_ELEMENT);
+  const field = new Array(fieldSize).fill(EMPTY_ELEMENT_VALUE);
   return field.map((item, index) => {
     if (index === 0) return item;
     return `${index}`;
@@ -30,7 +30,7 @@ export function renderField(container, fieldArray) {
   fieldArray.forEach((item) => {
     const fieldCell = document.createElement('div');
     fieldCell.classList.add('field__cell');
-    if (item === EMPTY_ELEMENT) fieldCell.classList.add('field__cell_empty');
+    if (item === EMPTY_ELEMENT_VALUE) fieldCell.classList.add('field__cell_empty');
     fieldCell.innerText = item;
     gameField.append(fieldCell);
   });
@@ -52,7 +52,7 @@ export function changeFieldClass(container, cells) {
 }
 
 export function getNeighbors(fieldArray, size) {
-  const xIndex = fieldArray.indexOf(EMPTY_ELEMENT);
+  const xIndex = fieldArray.indexOf(EMPTY_ELEMENT_VALUE);
   const neighbors = {
     top: xIndex - Math.sqrt(size),
     right: xIndex + 1,

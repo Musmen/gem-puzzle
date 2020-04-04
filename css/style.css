@@ -13,12 +13,21 @@
   padding: 0 20px;
 }
 
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .game__field {
   display: grid;
   justify-content: center;
   align-items: center;
+  margin: auto;
   
   user-select: none;
+  border: 1px solid gray;
+  background-color: lightgray;
 }
 
 .field__cell {
@@ -32,6 +41,8 @@
 
   /* background-color: lightgray; */
   border: 1px solid gray;
+  border-radius: 10px;
+  background-color: brown;
 }
 
 .field__cell:nth-child(-n + 4) {
@@ -41,7 +52,8 @@
 .field__cell_empty {
   color: lightgray;
 
-  background-color: lightgray;
+  background-color: transparent;
+  border: 0;
 }
 
 .field-size_3x3 {
@@ -79,4 +91,8 @@
 
 .shadow {
   box-shadow: 1px 1px 10px 4px red;
+}
+
+.animated {
+  transition: 0.2s all ease-out;   
 }

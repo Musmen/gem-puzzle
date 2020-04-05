@@ -3,6 +3,8 @@ import {
   DEBOUNCING_COORDINATE_DELTA,
   THROTTLING_DELAY,
   ANIMATION_DELAY,
+  ONE_SECOND,
+  TIME_BUTTON_TEXT,
 } from './helper.js';
 
 import {
@@ -21,28 +23,35 @@ export default class Game {
     this.field = [];
     this.size = null;
     this.turn = null;
+    this.time = {
+      game: 0,
+      start: null,
+      now: null,
+    };
+    this.clockID = null;
 
     this.targetCell = null;
     this.belowElement = null;
     this.cloneCell = null;
-    this.startCoordinates = null;
+    this.coordinates = null;
 
     this.isDropAble = false;
     this.isDragging = false;
     this.isAnimation = false;
+    this.isPaused = false;
 
     this.sizeOutputElement = null;
     this.turnOutputElement = null;
+    this.timeOutputElement = {
+      seconds: null,
+      minutes: null,
+    };
     this.fieldElement = null;
+    this.timeButton = null;
   }
 
-  clearTurn() {
-    this.turn = 0;
-    this.renderTurn();
-  }
-
-  addTurn() {
-    this.turn += 1;
+  setTurn(value) {
+    this.turn = value;
     this.renderTurn();
   }
 
@@ -54,7 +63,57 @@ export default class Game {
     this.turnOutputElement.innerText = this.getTurn();
   }
 
-  setSizeOutput(cells) {
+  renderTime() {
+    this.time.now = new Date();
+
+    const gameTime = new Date(this.time.now - this.time.start + this.time.game);
+    const minutes = `0${gameTime.getMinutes()}`.slice(-2);
+    const seconds = `0${gameTime.getSeconds()}`.slice(-2);
+
+    this.timeOutputElement.seconds.innerText = seconds;
+    this.timeOutputElement.minutes.innerText = minutes;
+  }
+
+  startClock() {
+    this.isPaused = false;
+    if (this.clockID) clearInterval(this.clockID);
+
+    this.time.start = new Date();
+    this.renderTime();
+
+    this.clockID = setInterval(() => {
+      this.renderTime();
+    }, ONE_SECOND);
+  }
+
+  pauseClock() {
+    if (this.clockID) clearInterval(this.clockID);
+    this.time.game = this.time.now - this.time.start + this.time.game;
+    this.isPaused = true;
+  }
+
+  clearClock() {
+    this.time = {
+      game: 0,
+      start: 0,
+      now: 0,
+    };
+  }
+
+  timeButtonHandler() {
+    const button = this.timeButton;
+
+    if (button.innerText.toLowerCase() === TIME_BUTTON_TEXT.STOP) {
+      button.innerText = TIME_BUTTON_TEXT.RESUME;
+      this.pauseClock();
+      return;
+    }
+
+    button.innerText = TIME_BUTTON_TEXT.STOP;
+    this.startClock();
+  }
+
+  renderSizeOutput(cells) {
     const size = Math.sqrt(cells);
     this.sizeOutputElement.innerText = `${size}x${size}`;
   }
@@ -65,7 +124,7 @@ export default class Game {
 
   setSize(size) {
     this.setFieldSize(size);
-    this.setSizeOutput(size);
+    this.renderSizeOutput(size);
   }
 
   changeFieldSize(newSize) {
@@ -80,14 +139,18 @@ export default class Game {
     const { target } = event;
     const newSize = +target.value;
     this.changeFieldSize(newSize);
-    this.clearTurn();
+    this.setTurn(0);
+    this.clearClock();
+    this.startClock();
   }
 
   startButtonHandler() {
     this.field = shuffleField(this.field);
     clearFieldElement(this.fieldElement);
     renderField(this.fieldElement, this.field);
-    this.clearTurn();
+    this.setTurn(0);
+    this.clearClock();
+    this.startClock();
   }
 
   swapCells(firstValue, secondValue) {
@@ -126,7 +189,7 @@ export default class Game {
     const {
       startX, startY,
       shiftX, shiftY,
-    } = this.startCoordinates;
+    } = this.coordinates;
 
     if (!this.isDragging) {
       const moveX = evt.pageX;
@@ -172,20 +235,21 @@ export default class Game {
     }
 
     this.animatedSwapCells(emptyElement, this.cloneCell);
-    this.addTurn();
+    this.setTurn(this.turn + 1);
   }
 
   onFieldMouseDownHandler(event) {
     if (!isNeighbor(this.field, this.size, event.target) || this.isAnimation) return;
-
+    if (!this.clockID) this.startClock();
+    if (this.isPaused) this.timeButtonHandler();
     this.targetCell = event.target;
     this.targetCell.ondragstart = () => false;
 
     this.belowElement = null;
 
-    this.startCoordinates = {
-      x: event.pageX,
-      y: event.pageY,
+    this.coordinates = {
+      startX: event.pageX,
+      startY: event.pageY,
       shiftX: event.clientX - this.targetCell.getBoundingClientRect().left,
       shiftY: event.clientY - this.targetCell.getBoundingClientRect().top,
     };
@@ -197,10 +261,10 @@ export default class Game {
     this.cloneCell = document.body.querySelector('.moveable');
     moveAt(
       this.cloneCell,
-      this.startCoordinates.x,
-      this.startCoordinates.y,
-      this.startCoordinates.shiftX,
-      this.startCoordinates.shiftY,
+      this.coordinates.startX,
+      this.coordinates.startY,
+      this.coordinates.shiftX,
+      this.coordinates.shiftY,
     );
 
     document.addEventListener('mousemove', this.onCloneCellMouseMoveHandler);
@@ -211,6 +275,9 @@ export default class Game {
     this.fieldElement = document.querySelector('#gameField');
     this.sizeOutputElement = document.querySelector('.size__output');
     this.turnOutputElement = document.querySelector('.game__turn');
+    this.timeOutputElement.seconds = document.querySelector('.time__seconds');
+    this.timeOutputElement.minutes = document.querySelector('.time__minutes');
+    this.timeButton = document.querySelector('#timeButton');
     this.changeFieldSize(DEFAULT.FIELD_SIZE);
 
     const sizeSelect = document.querySelector('#sizeSelect');
@@ -218,6 +285,8 @@ export default class Game {
 
     const startButton = document.querySelector('#startButton');
     startButton.addEventListener('click', this.startButtonHandler.bind(this));
+
+    this.timeButton.addEventListener('click', this.timeButtonHandler.bind(this));
 
     this.onFieldMouseDownHandler = this.onFieldMouseDownHandler.bind(this);
     this.onCloneCellMouseMoveHandler = throttle(this.onCloneCellMouseMoveHandler,

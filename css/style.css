@@ -6,6 +6,10 @@
   display: flex;
 }
 
+.navigation__button {
+  text-transform: uppercase;
+}
+
 .centralizer {
   max-width: 1200px;
   width: 100%;

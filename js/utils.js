@@ -1,10 +1,10 @@
-import { EMPTY_ELEMENT_VALUE } from './helper.js';
+import { EMPTY_ELEMENT_VALUE } from './helper';
 
 export function initField(fieldSize) {
   const field = new Array(fieldSize).fill(EMPTY_ELEMENT_VALUE);
   return field.map((item, index) => {
-    if (index === 0) return item;
-    return `${index}`;
+    if (index === fieldSize - 1) return item;
+    return `${index + 1}`;
   });
 }
 
@@ -85,3 +85,17 @@ export function throttle(callback, interval) {
     setTimeout(() => { enableCall = true; }, interval);
   };
 }
+
+export const disableDocumentScroll = (className = 'overflow-hidden') => {
+  document.body.classList.add(className);
+};
+
+export const enableDocumentScroll = (className = 'overflow-hidden') => {
+  document.body.classList.remove(className);
+};
+
+export const disableTab = (event) => {
+  if (event.key === 'Tab') event.preventDefault();
+};
+
+export const generateWinnerMessage = (minutes, seconds, turns) => `Ура! Вы решили головоломку за ${minutes} : ${seconds} и ${turns} ходов`;

@@ -1,4 +1,6 @@
-import Game from './game.js';
+import '../scss/style.scss';
+
+import Game from './game';
 
 const game = new Game();
 game.init();

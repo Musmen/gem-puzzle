@@ -16,3 +16,5 @@ export const TIME_BUTTON_TEXT = {
   STOP: 'стоп',
   RESUME: 'продолжить',
 };
+
+export const RESULTS_TABLE_TITLE = 'таблица рекордов';

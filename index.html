@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/style.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="./assets/favicon/favicon.png">
     <title>Gem-Puzzle</title>
   </head>
 
@@ -38,16 +38,16 @@
 
       <main class="main">
         <div class="game">
-          <p class="game__description">
-            <p>Ходов: <span class="game__turn">0</span></p>
-            <p>
+          <div class="game__description">
+            <p class="game__paragraph">Ходов: <span class="game__turn">0</span></p>
+            <p class="game__paragraph">
               Время:
               <span class="game__time">
                 <span id="minutes" class="time__minutes">00</span> :
                 <span id="seconds" class="time__seconds">00</span>
               </span>
             </p>
-          </p>
+          </div>
 
           <div id="gameField" class="game__field field-size_4x4">
           </div>
@@ -57,7 +57,7 @@
           <p class="size__description">
             Размер поля: <span id="sizeOutput" class="size__output">4x4</span>
           </p>
-          <label for="sizeSelect">Выбрать размер поля:</label>
+          <label for="sizeSelect">Выбрать размер поля: </label>
           <select id="sizeSelect" class="size__select">
             <option value="9">3x3</option>
             <option value="16" selected>4x4</option>
@@ -73,7 +73,15 @@
         by @Musmen. 2020
       </footer>
     </div>
-    
-    <script src='./js/script.js' type="module"></script>
+
+    <template id="popup__template">
+      <div class="popup__layout" tabindex="0">
+        <div class="popup__wrapper">
+          <p class="popup__description"></p>
+          <p class="popup__message"></p>
+          <button class="popup__close-button">OK</button>
+        </div>
+      </div>
+    </template>
   </body>
 </html>

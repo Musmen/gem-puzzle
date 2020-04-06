@@ -1,9 +1,48 @@
+html {
+  font-size: 16px;
+  font-family: "Lato-Regular", "Arial", "sans-serif";
+  font-weight: 400;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
 .list {
+  padding: 0;
   list-style: none;
+}
+
+.moveable {
+  position: absolute;
+  z-index: 999;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.shadow {
+  box-shadow: 1px 1px 10px 4px red;
+}
+
+.animated {
+  transition: 0.2s all ease-out;
 }
 
 .navigation__list {
   display: flex;
+  justify-content: center;
+
+  font-size: 14px;
+}
+
+.navigation__item {
+  margin-right: 20px;
+
+  &:last-child {
+    margin-right: 0;
+  }
 }
 
 .navigation__button {
@@ -23,15 +62,24 @@
   justify-content: center;
 }
 
+.game__paragraph {
+  margin-right: 20px;
+}
+
 .game__field {
   display: grid;
   justify-content: center;
   align-items: center;
   margin: auto;
-  
+
   user-select: none;
   border: 1px solid gray;
   background-color: lightgray;
+}
+
+.game__description {
+  display: flex;
+  justify-content: center;
 }
 
 .field__cell {
@@ -47,10 +95,10 @@
   border: 1px solid gray;
   border-radius: 10px;
   background-color: brown;
-}
 
-.field__cell:nth-child(-n + 4) {
-  border-top-width: 2px;
+  &:nth-child(-n + 4) {
+    border-top-width: 2px;
+  }
 }
 
 .field__cell_empty {
@@ -84,19 +132,17 @@
   grid: repeat(8, auto) / repeat(8, auto);
 }
 
-.moveable {
-  position: absolute;
-  z-index: 999;
+.size {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.hidden {
-  visibility: hidden; 
+.size__description {
+  margin-right: 20px;
 }
 
-.shadow {
-  box-shadow: 1px 1px 10px 4px red;
-}
-
-.animated {
-  transition: 0.2s all ease-out;   
+.footer {
+  display: flex;
+  justify-content: flex-end;
 }

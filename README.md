@@ -1,4 +1,4 @@
-# Tasks "Singolo-DOM & Singolo-Responsive"
+# Tasks "Gem-puzzle"
 
 ## RSSchool 2020 Q1
 

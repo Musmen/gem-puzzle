@@ -2,7 +2,6 @@ html {
   font-size: 16px;
   font-family: Verdana, Helvetica, sans-serif;
   font-weight: 400;
-  min-height: 100%;
 
   @media (max-width: 900px) {
     font-size: 15px;
@@ -38,18 +37,27 @@ html {
 .button {
   padding: 5px;
 
-  border: 1px solid red;
-  border-radius: 5px;
+  color: white;
 
-  background-color: greenyellow;
+  border: 2px solid rgb(180, 173, 173);
+  border-radius: 10px;
+
+  background-color: gray;
+
+  &:focus,
+  &:hover,
+  &:active {
+    border-color: rgba(153, 159, 185, 0.8);
+
+    background-color: #666d89;
+    outline: 0;
+
+    cursor: pointer;
+  }
 }
 
 .hidden {
   visibility: hidden;
-}
-
-.shadow {
-  box-shadow: 1px 1px 10px 4px red;
 }
 
 .animated {
@@ -57,7 +65,8 @@ html {
 }
 
 header {
-  background-color: indigo;
+  background-color: rgb(102,109,137);
+  background: linear-gradient(180deg, rgba(73,73,73,1) 0%, rgb(102,109,137) 100%);
 }
 
 .navigation__list {
@@ -87,13 +96,17 @@ header {
 }
 
 .centralizer {
-  max-width: 1200px;
   width: 100%;
   margin: 0 auto;
 }
 
 .main {
-  background-color: darkgrey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 111px);
+
+  background-color: rgb(73, 73, 73);
   background-image: url("../assets/img/about-bg.png");
 
   color: white;
@@ -109,19 +122,56 @@ header {
   margin-right: 20px;
 }
 
+.game__paragraph:last-child {
+  margin-right: 0;
+}
+
+.game__turn {
+  display: inline-block;
+  min-width: 50px;
+}
+
 .game__field {
   display: grid;
   justify-content: center;
   align-items: center;
-  // max-width: 1000px;
-  // width: 95vw;
+  box-sizing: border-box;
   margin: auto;
+  margin-bottom: 20px;
+  padding: 1px;
 
-  border: 2px double brown;
+  border: 10px ridge rgba(153, 159, 185, 0.8);
   border-radius: 10px;
   background-color: lightgray;
 
   user-select: none;
+}
+
+.size,
+.game__description {
+  color: rgba(255, 255, 255, 0.8);
+
+  -webkit-text-stroke: 1px rgba(153, 159, 185, 0.8);
+}
+
+.size .size__select,
+.size__select option {
+  color: rgb(106, 108, 121);
+
+  background-color: lightgray;
+
+  &:focus,
+  &:hover,
+  &:active {
+    color: white;
+
+    border-color: rgba(153, 159, 185, 0.8);
+
+    background-color: #666d89;
+    outline: 0;
+
+    cursor: pointer;
+  }
 }
 
 .game__description {
@@ -135,12 +185,11 @@ header {
   align-items: center;
 
   box-sizing: border-box;
-  max-width: 100px;
-  max-height: 100px;
+  max-width: 80px;
+  max-height: 80px;
 
   color: white;
-  /* background-color: lightgray; */
-  border: 2px solid gray;
+  border: 4px groove gray;
   border-radius: 10px;
   background-color: brown;
 
@@ -152,7 +201,7 @@ header {
 }
 
 .field__cell_empty {
-  color: lightgray;
+  color: transparent;
 
   background-color: transparent;
   border: 0;
@@ -160,95 +209,116 @@ header {
   cursor: default;
 }
 
+.shadow {
+  background-color: #666d89;
+  opacity: 0.6;
+  box-shadow: 1px 1px 5px 5px #666d89;
+}
+
 .field-size_3x3 {
   grid: repeat(3, auto) / repeat(3, auto);
 
   & .field__cell {
-    width: calc(95vw / 3);
-    height: calc(95vw / 3);
+    font-size: 30px;
+    width: calc(90vw / 3);
+    height: calc(90vw / 3);
   }
 }
 
 .cell-size_3x3 {
-  width: calc(95vw / 3);
-  height: calc(95vw / 3);
+  font-size: 30px;
+  width: calc(90vw / 3);
+  height: calc(90vw / 3);
 }
 
 .field-size_4x4 {
   grid: repeat(4, auto) / repeat(4, auto);
 
   & .field__cell {
-    width: calc(95vw / 4);
-    height: calc(95vw / 4);
+    font-size: 30px;
+    width: calc(90vw / 4);
+    height: calc(90vw / 4);
   }
 }
 
 .cell-size_4x4 {
-  width: calc(95vw / 4);
-  height: calc(95vw / 4);
+  font-size: 30px;
+  width: calc(90vw / 4);
+  height: calc(90vw / 4);
 }
 
 .field-size_5x5 {
   grid: repeat(5, auto) / repeat(5, auto);
 
   & .field__cell {
-    width: calc(95vw / 5);
-    height: calc(95vw / 5);
+    font-size: 28px;
+    width: calc(90vw / 5);
+    height: calc(90vw / 5);
   }
 }
 
 .cell-size_5x5 {
-  width: calc(95vw / 5);
-  height: calc(95vw / 5);
+  font-size: 28px;
+  width: calc(90vw / 5);
+  height: calc(90vw / 5);
 }
 
 .field-size_6x6 {
   grid: repeat(6, auto) / repeat(6, auto);
 
   & .field__cell {
-    width: calc(95vw / 6);
-    height: calc(95vw / 6);
+    font-size: 22px;
+    width: calc(90vw / 6);
+    height: calc(90vw / 6);
   }
 }
 
 .cell-size_6x6 {
-  width: calc(95vw / 6);
-  height: calc(95vw / 6);
+  font-size: 22px;
+  width: calc(90vw / 6);
+  height: calc(90vw / 6);
 }
 
 .field-size_7x7 {
   grid: repeat(7, auto) / repeat(7, auto);
 
   & .field__cell {
-    width: calc(95vw / 7);
-    height: calc(95vw / 7);
+    font-size: 18px;
+    width: calc(90vw / 7);
+    height: calc(90vw / 7);
   }
 }
 
 .cell-size_7x7 {
-  width: calc(95vw / 7);
-  height: calc(95vw / 7);
+  font-size: 18px;
+  width: calc(90vw / 7);
+  height: calc(90vw / 7);
 }
 
 .field-size_8x8 {
   grid: repeat(8, auto) / repeat(8, auto);
 
   & .field__cell {
-    width: calc(95vw / 8);
-    height: calc(95vw / 8);
+    font-size: 16px;
+    width: calc(90vw / 8);
+    height: calc(90vw / 8);
   }
 }
 
 .cell-size_8x8 {
-  width: calc(95vw / 8);
-  height: calc(95vw / 8);
+  font-size: 16px;
+  width: calc(90vw / 8);
+  height: calc(90vw / 8);
 }
 
 .size {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.size p {
+  margin-top: 0;
 }
 
 .size__description {
@@ -265,5 +335,11 @@ header {
   align-items: center;
   min-height: 60px;
 
-  background-color: lightblue;
+  color: rgba(255, 255, 255, 0.8);
+
+  -webkit-text-stroke: 1px rgba(153, 159, 185, 0.8);
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.8);
+
+  background-color: rgb(102,109,137);
+  background: linear-gradient(180deg, rgb(102,109,137) 0%, rgba(73,73,73,1) 100%);
 }

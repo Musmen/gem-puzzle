@@ -1,6 +1,10 @@
 import '../scss/style.scss';
 
+import renderHTML from './renderHTML';
 import Game from './game';
 
-const game = new Game();
-game.init();
+window.onload = () => {
+  renderHTML();
+  const game = new Game();
+  game.init();
+};

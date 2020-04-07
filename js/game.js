@@ -93,7 +93,7 @@ export default class Game {
 
   pauseClock() {
     if (this.clockID) clearInterval(this.clockID);
-    this.time.game = this.time.now - this.time.start + this.time.game;
+    if (!this.isPaused) this.time.game = this.time.now - this.time.start + this.time.game;
     this.isPaused = true;
   }
 
@@ -105,10 +105,10 @@ export default class Game {
     };
   }
 
-  timeButtonHandler() {
+  timeButtonHandler(event) {
     const button = this.timeButton;
 
-    if (button.innerText.toLowerCase() === TIME_BUTTON_TEXT.STOP) {
+    if (button.innerText.toLowerCase() === TIME_BUTTON_TEXT.STOP && event) {
       button.innerText = TIME_BUTTON_TEXT.RESUME;
       this.pauseClock();
       return;
@@ -164,8 +164,8 @@ export default class Game {
     renderField(this.fieldElement, this.field);
     this.setTurn(0);
     this.clearClock();
-    this.startClock();
-    // this.isWinner();
+    this.timeButtonHandler();
+    this.isWinner();
   }
 
   isWinner() {
@@ -173,6 +173,7 @@ export default class Game {
       if (+this.field[i - 1] !== i) return;
     }
 
+    this.pauseClock();
     const popup = new Popup(document.body, 'popup', this.newGame.bind(this));
 
     const { timeOutput, sizeOutputElement, turn } = this;
@@ -189,7 +190,10 @@ export default class Game {
   }
 
   resultsButtonHandler() {
-    const popup = new Popup(document.body, 'popup');
+    this.pauseClock();
+    const popup = new Popup(document.body, 'popup', () => {
+      this.timeButtonHandler();
+    });
 
     const description = RESULTS_TABLE_TITLE.toUpperCase();
     let message = '';

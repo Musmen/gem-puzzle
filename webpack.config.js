@@ -43,6 +43,15 @@ const config = {
              ]
       },
       {
+        test: /\.(woff|woff2|ttf|otf|eot)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            outputPath: './assets/fonts/',
+          }
+        }]
+      },
+      {
         test: /\.(jpg|png|svg|gif)$/,
         use: [
           {
@@ -62,15 +71,6 @@ const config = {
           }
         ]
       },
-      {
-        test: /\.(woff|woff2|ttf|otf|eot)$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            outputPath: './assets/fonts/',
-          }
-        }]
-      }
     ]
   },
 

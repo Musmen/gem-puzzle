@@ -57,29 +57,33 @@
           <p class="size__description">
             Размер поля: <span id="sizeOutput" class="size__output">4x4</span>
           </p>
-          <label for="sizeSelect">Выбрать размер поля: </label>
-          <select id="sizeSelect" class="size__select">
-            <option value="9">3x3</option>
-            <option value="16" selected>4x4</option>
-            <option value="25">5x5</option>
-            <option value="36">6x6</option>
-            <option value="49">7x7</option>
-            <option value="64">8x8</option>
-          </select>
+          <p>
+            <label for="sizeSelect">Выбрать размер поля: </label>
+            <select id="sizeSelect" class="size__select">
+              <option value="9">3x3</option>
+              <option value="16" selected>4x4</option>
+              <option value="25">5x5</option>
+              <option value="36">6x6</option>
+              <option value="49">7x7</option>
+              <option value="64">8x8</option>
+            </select>
+          </p>
         </div>
       </main>
 
       <footer class="footer">
-        by @Musmen. 2020
+        <div class="footer__contacts">
+          by @Musmen. RSSchool 2020 Q1
+        </div>
       </footer>
     </div>
 
     <template id="popup__template">
       <div class="popup__layout" tabindex="0">
         <div class="popup__wrapper">
+          <button class="popup__close-button">X</button>
           <p class="popup__description"></p>
           <p class="popup__message"></p>
-          <button class="popup__close-button">OK</button>
         </div>
       </div>
     </template>

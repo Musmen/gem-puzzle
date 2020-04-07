@@ -11,10 +11,10 @@ export function initField(fieldSize) {
 export function shuffleField(array) {
   const result = array.slice();
 
-  for (let i = array.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
-  }
+  // for (let i = array.length - 1; i > 0; i -= 1) {
+  //   const j = Math.floor(Math.random() * (i + 1));
+  //   [result[i], result[j]] = [result[j], result[i]];
+  // }
 
   return result;
 }
@@ -98,4 +98,4 @@ export const disableTab = (event) => {
   if (event.key === 'Tab') event.preventDefault();
 };
 
-export const generateWinnerMessage = (minutes, seconds, turns) => `Ура! Вы решили головоломку за ${minutes} : ${seconds} и ${turns} ходов`;
+export const generateWinnerMessage = (minutes, seconds, turns) => `Ура! Вы решили головоломку\n за ${minutes} : ${seconds} и ${turns} ходов`;

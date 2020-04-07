@@ -25,7 +25,7 @@ export default class Popup {
     const layout = popup.querySelector('.popup__layout');
 
     layout.classList.add(mainClass);
-    if (description) popup.querySelector('.popup__description').textContent = description;
+    if (description) popup.querySelector('.popup__description').innerText = description;
     if (message) popup.querySelector('.popup__message').innerText = message;
 
     layout.addEventListener('click', this.close);

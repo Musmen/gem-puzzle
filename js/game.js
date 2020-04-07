@@ -165,7 +165,7 @@ export default class Game {
     this.setTurn(0);
     this.clearClock();
     this.startClock();
-    this.isWinner();
+    // this.isWinner();
   }
 
   isWinner() {
@@ -196,7 +196,7 @@ export default class Game {
     this.results
       .sort((a, b) => +a.turn - +b.turn)
       .forEach((item, index) => {
-        if (index < 11) message += `${index + 1}. ХОДЫ: ${item.turn} (РАЗМЕР: ${item.size})\n`;
+        if (index < 10) message += `${index + 1}. ХОДЫ: ${item.turn} (РАЗМЕР: ${item.size})\n`;
       });
 
     popup.open({ description, message });
@@ -301,7 +301,7 @@ export default class Game {
     const belowElement = document.elementFromPoint(evt.clientX, evt.clientY);
     this.cloneCell.classList.remove('hidden');
 
-    const dropAbleBelow = belowElement.closest('.field__cell_empty');
+    const dropAbleBelow = belowElement && belowElement.closest('.field__cell_empty');
 
     if (dropAbleBelow) {
       this.belowElement = dropAbleBelow;
@@ -351,7 +351,7 @@ export default class Game {
 
     const clone = this.targetCell.cloneNode(true);
     this.targetCell.classList.add('hidden');
-    clone.classList.add('moveable');
+    clone.classList.add('moveable', `cell-size_${Math.sqrt(this.size)}x${Math.sqrt(this.size)}`);
     document.body.append(clone);
     this.cloneCell = document.body.querySelector('.moveable');
     moveAt(

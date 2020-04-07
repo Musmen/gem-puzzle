@@ -1,4 +1,4 @@
-# Tasks "Gem-puzzle"
+# Task "Gem-puzzle"
 
 ## RSSchool 2020 Q1
 
